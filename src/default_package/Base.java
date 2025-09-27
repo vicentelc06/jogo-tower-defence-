@@ -1,5 +1,7 @@
 package default_package;
 
+
+
 public class Base {
 	int vida;
 
@@ -16,4 +18,8 @@ public class Base {
 	 int getVida() {
 	        return vida;
 	    }
+
+    int getPosicao(){
+        return casinha.x;
+    }
 }
