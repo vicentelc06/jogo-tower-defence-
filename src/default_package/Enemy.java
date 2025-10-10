@@ -3,6 +3,11 @@ package default_package;
 public class Enemy {
     int vida = 10;
     int dano = 2;
+    int linha;
+
+    public Enemy(int linha){
+        this.linha=linha;
+    }
 
     Posicao lugar = new Posicao(5,0);
 
@@ -13,9 +18,5 @@ public class Enemy {
     int getPosicao(){
         return lugar.x;
     }
-
-
-
-
 
 }
