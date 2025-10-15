@@ -1,15 +1,15 @@
 package default_package;
 
 public class Enemy {
-    int vida = 10;
-    int dano = 2;
+    int vida;
+    int dano;
     int linha;
 
     public Enemy(int linha){
         this.linha=linha;
     }
 
-    Posicao lugar = new Posicao(5,0);
+    Posicao lugar = new Posicao(6,0);
 
     void caminharDoElemento(){
          lugar.x--;
