@@ -11,8 +11,8 @@ public class Enemy {
 
     Posicao lugar = new Posicao(6,0);
 
-    void caminharDoElemento(){
-         lugar.x--;
+    void caminharDoElemento(int velocidade){
+        lugar.x-= velocidade;
     }
 
     int getPosicao(){

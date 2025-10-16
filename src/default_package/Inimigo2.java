@@ -9,7 +9,5 @@ public class Inimigo2 extends Enemy{
         super(linha);
     }
 
-    @Override
-    void caminharDoElemento(){lugar.x = (lugar.x - 2);}
 
 }

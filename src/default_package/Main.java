@@ -26,8 +26,8 @@ public class Main {
                 System.out.println("O monstro está a " + monstro.getPosicao() + " passos da sua base");
                 System.out.println("O monstrinho está a " + monstrinho.getPosicao() + " passos da sua base");
                 System.out.println("A vida da base é: " + base.vida);
-                monstro.caminharDoElemento();
-                monstrinho.caminharDoElemento();
+                monstro.caminharDoElemento(1);
+                monstrinho.caminharDoElemento(2);
 
                 for (int i = 0; i < 3; i++) {
                     if (i == monstro.linha) {
@@ -54,7 +54,7 @@ public class Main {
                 System.out.println("A base recebeu dano!");
                 System.out.println("A vida da base é: " + base.vida);
                 System.out.println("O monstro está a " + monstro.getPosicao() + " passos da sua base");
-                monstro.caminharDoElemento();
+                monstro.caminharDoElemento(1);
 
                 for (int i = 0; i < 3; i++){
                     if(i == monstro.linha){
