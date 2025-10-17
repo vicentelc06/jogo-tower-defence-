@@ -11,6 +11,7 @@ public class Main {
         Inimigo1 monstro = new Inimigo1(1);
         Inimigo2 monstrinho = new Inimigo2(2);
         int tick = 0;
+        Moeda moeda = new Moeda(0);
 
         Caminho[] caminhos = new Caminho[3];
 
@@ -26,6 +27,7 @@ public class Main {
                 System.out.println("O monstro está a " + monstro.getPosicao() + " passos da sua base");
                 System.out.println("O monstrinho está a " + monstrinho.getPosicao() + " passos da sua base");
                 System.out.println("A vida da base é: " + base.vida);
+                System.out.println("Suas moedas:"+moeda.getMoeda());
                 monstro.caminharDoElemento(1);
                 monstrinho.caminharDoElemento(2);
 
@@ -40,6 +42,7 @@ public class Main {
                 }
 
                 tick++;
+                moeda.ganhar(1);
 
                 try {
                     Thread.sleep(1000); // 1000 ms = 1 segundo
@@ -53,6 +56,7 @@ public class Main {
                 base.receberDano(monstrinho.dano);
                 System.out.println("A base recebeu dano!");
                 System.out.println("A vida da base é: " + base.vida);
+                System.out.println("Suas moedas:"+moeda.getMoeda());
                 System.out.println("O monstro está a " + monstro.getPosicao() + " passos da sua base");
                 monstro.caminharDoElemento(1);
 
@@ -64,6 +68,7 @@ public class Main {
                 }
 
                 tick++;
+                moeda.ganhar(1);
 
                 try {
                     Thread.sleep(1000); // 1000 ms = 1 segundo
@@ -79,8 +84,10 @@ public class Main {
                 base.receberDano(monstrinho.dano);
                 System.out.println("A base recebeu dano!");
                 System.out.println("A vida da base é: " + base.vida);
+                System.out.println("Suas moedas:"+moeda.getMoeda());
 
                 tick++;
+                moeda.ganhar(1);
 
                 try {
                     Thread.sleep(1000); // 1000 ms = 1 segundo
