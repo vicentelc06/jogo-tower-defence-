@@ -1,75 +1,64 @@
 package default_package;
-
+import java.util.Scanner;
 
 
 
 public class Main {
-//cara
+    //cara
     public static void main(String[] args) {
 
-        Base base = new Base(10);
-        Inimigo1 monstro = new Inimigo1(1);
-        Inimigo2 monstrinho = new Inimigo2(2);
-        int tick = 0;
-        Moeda moeda = new Moeda(0);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("======================");
+        System.out.print("Digite 'S' para iniciar o jogo");
+        String iniciar = scanner.nextLine();
+        System.out.println("======================");
 
-        Caminho[] caminhos = new Caminho[3];
 
-        for (int i = 0; i < 3; i++) {
-            caminhos[i] = new Caminho(10);
-        }
+        if (iniciar.equalsIgnoreCase("s")) {
 
-        while (base.vida > 0) {
+            Base base = new Base(10);
+            int tick = 0;
+            Moeda moeda = new Moeda(10);
+            int onda = 1;
+            WaveManager gerenciador = new WaveManager();
 
-            if ((monstro.getPosicao() != base.getPosicao()) && (monstrinho.getPosicao() != base.getPosicao())){
+            Caminho[] caminhos = new Caminho[3];
 
-                System.out.println("tempo: " + tick);
-                System.out.println("O monstro está a " + monstro.getPosicao() + " passos da sua base");
-                System.out.println("O monstrinho está a " + monstrinho.getPosicao() + " passos da sua base");
-                System.out.println("A vida da base é: " + base.vida);
-                System.out.println("Suas moedas:"+moeda.getMoeda());
-                monstro.caminharDoElemento(1);
-                monstrinho.caminharDoElemento(2);
+            for (int i = 0; i < 3; i++) {
+                caminhos[i] = new Caminho(10);
+            }
+            //colocar o loop do jogo após o loop de "comprar" torres
+
+            gerenciador.ondas(onda);
+            while (base.vida > 0) {
+
+                for (int i=0; i<10; i++){
+                    if (gerenciador.monstros[i]!=null){
+                        //gerenciador.monstros[i].caminharDoElemento(1);
+                        if (gerenciador.monstros[i].getPosicao() == base.getPosicao())
+                        {
+                            base.receberDano(gerenciador.monstros[i].dano);
+                        }
+                        else{
+                            gerenciador.monstros[i].caminharDoElemento(1);
+                        }
+                        //aqui dá pra fazer outro if que verifica a vida deles e quando ela chegar a 0 a gente esvazia a posição
+                    }
+                }
 
                 for (int i = 0; i < 3; i++) {
-                    if (i == monstro.linha) {
-                        caminhos[i].colocarInimigo(monstro.getPosicao());
+
+                    for (int j = 0; j < gerenciador.monstros.length; j++) {
+                        Enemy m = gerenciador.monstros[j];
+                        if (m != null && m.linha == i) {
+                            caminhos[i].colocarInimigo(m.getPosicao());
+                        }
                     }
-                    if (i == monstrinho.linha){
-                        caminhos[i].colocarInimigo(monstrinho.getPosicao());
-                    }
-                    caminhos[i].exibir();
+                    caminhos[i].exibir(); // exibe a linha depois de colocar todos os monstros
                 }
 
-                tick++;
-                moeda.ganhar(1);
-
-                try {
-                    Thread.sleep(1000); // 1000 ms = 1 segundo
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            } else if ((monstrinho.getPosicao() == base.getPosicao()) && monstro.getPosicao() != base.getPosicao()) {
-
-                System.out.println("tempo: " + tick);
-                base.receberDano(monstrinho.dano);
-                System.out.println("A base recebeu dano!");
-                System.out.println("A vida da base é: " + base.vida);
-                System.out.println("Suas moedas:"+moeda.getMoeda());
-                System.out.println("O monstro está a " + monstro.getPosicao() + " passos da sua base");
-                monstro.caminharDoElemento(1);
-
-                for (int i = 0; i < 3; i++){
-                    if(i == monstro.linha){
-                        caminhos[i].colocarInimigo(monstro.getPosicao());
-                    }
-                    caminhos[i].exibir();
-                }
-
-                tick++;
-                moeda.ganhar(1);
-
+                System.out.println("VIDA: "+base.vida+" MOEDAS: "+moeda.getMoeda());
+                System.out.println("======================================");
                 try {
                     Thread.sleep(1000); // 1000 ms = 1 segundo
                 } catch (InterruptedException e) {
@@ -77,29 +66,10 @@ public class Main {
                 }
             }
 
-            else if ((monstro.getPosicao() == base.getPosicao()) && (monstrinho.getPosicao() == base.getPosicao())){
-
-                System.out.println("tempo: " + tick);
-                base.receberDano(monstro.dano);
-                base.receberDano(monstrinho.dano);
-                System.out.println("A base recebeu dano!");
-                System.out.println("A vida da base é: " + base.vida);
-                System.out.println("Suas moedas:"+moeda.getMoeda());
-
-                tick++;
-                moeda.ganhar(1);
-
-                try {
-                    Thread.sleep(1000); // 1000 ms = 1 segundo
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
         }
-
-
-        System.out.println("A base foi destruida!!");
     }
 }
+
+
+
 

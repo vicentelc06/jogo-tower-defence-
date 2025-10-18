@@ -4,6 +4,8 @@ public class Caminho {
 
     char[] trilha;
     int tamanho;
+    int inim = 0;
+    Enemy[] monstro = new Enemy[100];
 
     public Caminho(int tamanho) {
         this.tamanho = tamanho;
@@ -29,6 +31,13 @@ public class Caminho {
             System.out.print(c + " ");
         }
         System.out.println();
+    }
+
+    public void invocar(int linha, int lugar){
+
+        monstro[inim] = new Enemy(linha,lugar);
+        inim++;
+
     }
 
 }
