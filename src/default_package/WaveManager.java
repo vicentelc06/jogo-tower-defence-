@@ -12,7 +12,7 @@ public class WaveManager {
       switch(wave){
           case 1:
 
-            monstros[0] = new Enemy(1,10);
+            monstros[0] = new Inimigo2(1,10);
             monstros[1] = new Inimigo1(2,8);
 
           break;

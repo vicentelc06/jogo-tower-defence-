@@ -16,8 +16,13 @@ public class Caminho {
     }
 
     public void colocarInimigo(int posicao) {
-        limpar();
         trilha[posicao] = 'Z';
+        //limpar();
+    }
+
+    public void colocarTorre(int coluna){
+        trilha[coluna] = 'T';
+        //limpar();
     }
 
     public void limpar() {
