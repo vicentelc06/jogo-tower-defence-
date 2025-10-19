@@ -18,9 +18,14 @@ public class WaveManager {
           break;
           case 2:
 
-              monstros[2]=new Enemy(2,7);
+              monstros[2]=new Inimigo2(2,7);
 
           break;
+          case 3:
+
+              monstros[3]=new Inimigo1(2,7);
+
+              break;
       }
 
 }

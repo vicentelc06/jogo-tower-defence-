@@ -17,7 +17,7 @@ public class Enemy {
     //Posicao lugar = new Posicao(6,0);
 
     void morrer(){
-        if (this.vida == 0){
+        if (this.vida <= 0){
             System.out.println("Inimigo morto");
             temVida = false;
         }

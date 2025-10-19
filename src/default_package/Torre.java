@@ -14,7 +14,7 @@ public class Torre {
     }
 
     void morrer(){
-        if(this.vida == 0){
+        if(this.vida <= 0){
             this.temVida = false;
         }
     }
