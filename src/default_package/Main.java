@@ -93,24 +93,36 @@ public class Main {
                     System.out.println("Digite '0' para comprar mais torres: ");
                     comprar = scanner.nextInt();
                 }
+
                 rodando = true;
                 gerenciador.ondas(a);
+
                 while (base.vida > 0 && rodando) {
                     rodando = false;
                     for (int i = 0; i < 10; i++) {
                         if (gerenciador.monstros[i] != null) {
                             rodando = true;
+                            boolean anda = true;
+
                             if (gerenciador.monstros[i].temVida) {
                                 if (gerenciador.monstros[i].getPosicao() == base.getPosicao()) {
                                     base.receberDano(gerenciador.monstros[i].dano);
-                                } else if ((gerenciador.monstros[i].getPosicao() == torres[i].getColuna()) && (torres[i].temVida) && (gerenciador.monstros[i].linha == torres[i].linha)) {
-                                    gerenciador.monstros[i].receberDano(torres[i].getDano());
-                                    gerenciador.monstros[i].morrer();
-                                    torres[i].receberDano(gerenciador.monstros[i].getDano());
-                                    torres[i].morrer();
-                                } else {
+                                    anda = false;
+                                } else {// ((gerenciador.monstros[i].getPosicao() == torres[i].getColuna()) && (torres[i].temVida) && (gerenciador.monstros[i].linha == torres[i].linha)) {
+                                    for (int q=0;q<100;q++) {
+                                        if ((torres[q]!=null) && (gerenciador.monstros[i].getPosicao() == torres[q].getColuna()) && (torres[q].temVida) && (gerenciador.monstros[i].linha == torres[q].linha)) {
+                                            gerenciador.monstros[i].receberDano(torres[q].getDano());
+                                            gerenciador.monstros[i].morrer();
+                                            torres[q].receberDano(gerenciador.monstros[i].getDano());
+                                            torres[q].morrer();
+                                            anda = false;
+                                        }
+                                    }
+                                }
+                                if (anda==true) {
                                     gerenciador.monstros[i].caminharDoElemento(1);
                                 }
+
                             } else {
                                 gerenciador.monstros[i] = null;
                                 moeda.ganhar(6);
@@ -119,11 +131,12 @@ public class Main {
                     }
 
                     for (int i = 0; i < 3; i++) {
-
-                        for (int j = 0; j < gerenciador.monstros.length; j++) {
+                        caminhos[i].limpar();
+                        for (int j = 0; j < 100; j++) {
                             Enemy m = gerenciador.monstros[j];
+                            //caminhos[i].limpar();
                             if (m != null && m.linha == i) {
-                                caminhos[i].limpar();
+
                                 if (m.temVida) {
                                     caminhos[i].colocarInimigo(m.getPosicao());
                                 }
@@ -156,6 +169,7 @@ public class Main {
             else{
                 System.out.print("Você ganhou!");
             }
+
         }
     }
 }
