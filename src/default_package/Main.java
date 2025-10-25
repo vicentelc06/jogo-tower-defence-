@@ -49,16 +49,16 @@ public class Main {
                         case 1:
                             if (moeda.comprar(4)) {
                                 System.out.println("Linha: ");
-                                int linhaDaTorre = scanner.nextInt();
-                                while (linhaDaTorre < 1 || linhaDaTorre > 3) {
+                                int linhaDaTorre = scanner.nextInt() - 1;
+                                while (linhaDaTorre < 0 || linhaDaTorre > 2) {
                                     System.out.println("Linha inválida. Tente novamente: ");
-                                    linhaDaTorre = scanner.nextInt();
+                                    linhaDaTorre = scanner.nextInt() - 1;
                                 }
                                 System.out.println("Coluna: ");
-                                int colunaDaTorre = scanner.nextInt();
-                                while (colunaDaTorre < 1 || colunaDaTorre > 3) {
+                                int colunaDaTorre = scanner.nextInt() - 1;
+                                while (colunaDaTorre < 0 || colunaDaTorre > 2) {
                                     System.out.println("Coluna inválida. Tente novamente: ");
-                                    colunaDaTorre = scanner.nextInt();
+                                    colunaDaTorre = scanner.nextInt() - 1;
                                 }
                                 torres[t] = new TorreTipo1(linhaDaTorre, colunaDaTorre);
                                 t++;
@@ -69,16 +69,16 @@ public class Main {
                         case 2:
                             if (moeda.comprar(3)) {
                                 System.out.println("Linha: ");
-                                int linhaDaTorre = scanner.nextInt();
-                                while (linhaDaTorre < 1 || linhaDaTorre > 3) {
+                                int linhaDaTorre = scanner.nextInt() - 1;
+                                while (linhaDaTorre < 0|| linhaDaTorre > 2) {
                                     System.out.println("Linha inválida. Tente novamente: ");
-                                    linhaDaTorre = scanner.nextInt();
+                                    linhaDaTorre = scanner.nextInt() - 1;
                                 }
                                 System.out.println("Coluna: ");
-                                int colunaDaTorre = scanner.nextInt();
-                                while (colunaDaTorre < 1 || colunaDaTorre > 3) {
+                                int colunaDaTorre = scanner.nextInt() - 1;
+                                while (colunaDaTorre < 0 || colunaDaTorre > 2) {
                                     System.out.println("Coluna inválida. Tente novamente: ");
-                                    colunaDaTorre = scanner.nextInt();
+                                    colunaDaTorre = scanner.nextInt() - 1;
                                 }
                                 torres[t] = new TorreTipo2(linhaDaTorre, colunaDaTorre);
                                 t++;
