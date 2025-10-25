@@ -22,7 +22,7 @@ public class Torre {
     void receberDano(int dano){vida -= dano;}
 
     int getColuna(){return coluna;}
-    int getDano(){return dano;}
+    int getVida(){return vida;}
 }
 
 

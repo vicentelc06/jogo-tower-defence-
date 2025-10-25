@@ -6,15 +6,13 @@ public class Enemy {
     int linha;
     int lugar;
     boolean temVida;
+    int velocidade;
 
     public Enemy(int linha, int lugar){
         this.linha=linha;
         this.lugar = lugar;
-        this.dano = 2;
         this.temVida = true;
     }
-
-    //Posicao lugar = new Posicao(6,0);
 
     void morrer(){
         if (this.vida <= 0){
@@ -23,22 +21,18 @@ public class Enemy {
         }
     }
 
-    void caminharDoElemento(int velocidade){
-        //lugar.x-= velocidade;
-        lugar -= velocidade;
+    void caminharDoElemento(){
+        lugar -= this.velocidade;
         if (lugar<0) {
             lugar=0;
         }
     }
 
     int getPosicao(){
-       // return lugar.x;
         return lugar;
     }
 
-    int getDano(){
-        return dano;
-    }
+    int getVida(){return vida;}
 
     void receberDano(int dano){vida -= dano;}
 

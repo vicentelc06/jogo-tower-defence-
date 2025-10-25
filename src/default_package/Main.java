@@ -111,16 +111,18 @@ public class Main {
                                 } else {// ((gerenciador.monstros[i].getPosicao() == torres[i].getColuna()) && (torres[i].temVida) && (gerenciador.monstros[i].linha == torres[i].linha)) {
                                     for (int q=0;q<100;q++) {
                                         if ((torres[q]!=null) && (gerenciador.monstros[i].getPosicao() == torres[q].getColuna()) && (torres[q].temVida) && (gerenciador.monstros[i].linha == torres[q].linha)) {
-                                            gerenciador.monstros[i].receberDano(torres[q].getDano());
+                                            gerenciador.monstros[i].receberDano(torres[q].dano);
                                             gerenciador.monstros[i].morrer();
-                                            torres[q].receberDano(gerenciador.monstros[i].getDano());
+                                            torres[q].receberDano(gerenciador.monstros[i].dano);
                                             torres[q].morrer();
+                                            System.out.println("Vida da torre: " + torres[q].getVida());
+                                            System.out.println("Vida do inimigo: " + gerenciador.monstros[i].getVida());
                                             anda = false;
                                         }
                                     }
                                 }
                                 if (anda==true) {
-                                    gerenciador.monstros[i].caminharDoElemento(1);
+                                    gerenciador.monstros[i].caminharDoElemento();
                                 }
 
                             } else {
