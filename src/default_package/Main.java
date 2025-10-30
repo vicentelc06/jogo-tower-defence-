@@ -99,7 +99,8 @@ public class Main {
 
                 while (base.vida > 0 && rodando) {
                     rodando = false;
-                    for (int i = 0; i < 10; i++) {
+
+                    for (int i = 0; i < 10; i++) {// dos inimigo
                         if (gerenciador.monstros[i] != null) {
                             rodando = true;
                             boolean anda = true;
@@ -111,12 +112,12 @@ public class Main {
                                 } else {// ((gerenciador.monstros[i].getPosicao() == torres[i].getColuna()) && (torres[i].temVida) && (gerenciador.monstros[i].linha == torres[i].linha)) {
                                     for (int q=0;q<100;q++) {
                                         if ((torres[q]!=null) && (gerenciador.monstros[i].getPosicao() == torres[q].getColuna()) && (torres[q].temVida) && (gerenciador.monstros[i].linha == torres[q].linha)) {
-                                            gerenciador.monstros[i].receberDano(torres[q].dano);
-                                            gerenciador.monstros[i].morrer();
+                                            //gerenciador.monstros[i].receberDano(torres[q].dano);
+                                            //gerenciador.monstros[i].morrer();
                                             torres[q].receberDano(gerenciador.monstros[i].dano);
                                             torres[q].morrer();
-                                            System.out.println("Vida da torre: " + torres[q].getVida());
-                                            System.out.println("Vida do inimigo: " + gerenciador.monstros[i].getVida());
+                                            //System.out.println("Vida da torre: " + torres[q].getVida());
+                                            //System.out.println("Vida do inimigo: " + gerenciador.monstros[i].getVida());
                                             anda = false;
                                         }
                                     }
@@ -131,6 +132,41 @@ public class Main {
                             }
                         }
                     }
+
+                    for (int i=0;i<100;i++){ //das torre
+
+                        if (torres[i] != null){
+
+                            for (int q=0; q < 100;q++){
+
+                                if (gerenciador.monstros[q] != null){
+                                if (gerenciador.monstros[q].linha == torres[i].linha) {
+
+                                    if (torres[i] instanceof TorreTipo2) {
+                                        if (gerenciador.monstros[q].getPosicao() <= (torres[i].coluna + torres[i].alcance)){
+                                            gerenciador.monstros[q].receberDano(torres[i].dano);
+                                            gerenciador.monstros[q].morrer();
+                                            System.out.println("rodou isso");
+                                        }
+                                    }
+                                    else if (torres[i] instanceof TorreTipo1){
+                                        if (gerenciador.monstros[q].getPosicao()==torres[i].coluna){
+                                            gerenciador.monstros[q].receberDano(torres[q].dano);
+                                            gerenciador.monstros[q].morrer();
+                                            System.out.println("rodou aquilo");
+                                        }
+                                    }
+                                    System.out.println("Vida da torre: " + torres[i].getVida());
+                                    System.out.println("Vida do inimigo: " + gerenciador.monstros[q].getVida());
+                                }
+                                }
+                            }
+                        }
+                    }
+
+
+
+
 
                     for (int i = 0; i < 3; i++) {
                         caminhos[i].limpar();

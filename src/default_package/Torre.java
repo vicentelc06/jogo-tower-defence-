@@ -6,6 +6,7 @@ public class Torre {
     int coluna;
     int dano;
     boolean temVida;
+    int alcance=5;
 
     public Torre(int linha, int coluna){
         this.linha = linha;
