@@ -23,6 +23,8 @@ public class Main {
             WaveManager gerenciador = new WaveManager();
             Torre[] torres = new Torre[100];
             int t = 0;
+            Disparo[] disparo = new Disparo[200];
+            int d = 0;
             boolean rodando = true;
 
             Caminho[] caminhos = new Caminho[3];
@@ -97,8 +99,10 @@ public class Main {
                 rodando = true;
                 gerenciador.ondas(a);
 
+
                 while (base.vida > 0 && rodando) {
                     rodando = false;
+                    tick ++;
                     for (int i = 0; i < 10; i++) {
                         if (gerenciador.monstros[i] != null) {
                             rodando = true;
@@ -110,7 +114,23 @@ public class Main {
                                     anda = false;
                                 } else {// ((gerenciador.monstros[i].getPosicao() == torres[i].getColuna()) && (torres[i].temVida) && (gerenciador.monstros[i].linha == torres[i].linha)) {
                                     for (int q=0;q<100;q++) {
-                                        if ((torres[q]!=null) && (gerenciador.monstros[i].getPosicao() == torres[q].getColuna()) && (torres[q].temVida) && (gerenciador.monstros[i].linha == torres[q].linha)) {
+                                        if ((torres[q] != null) && (gerenciador.monstros[i].linha == torres[q].linha) && (gerenciador.monstros[i].getPosicao() != torres[q].coluna) && (torres[q].temVida)){
+                                            if (tick % 2 == 0){
+                                                disparo[d] = new Disparo(torres[q].getLinha(), torres[q].getColuna(), torres[q].getDano());
+                                                d++;
+                                            }
+                                            for(int c = 0; c < 200; c++){
+                                                if (disparo[c] != null && disparo[c].emTransito){
+                                                    disparo[c].andar();
+                                                    if (disparo[c].atingir(gerenciador.monstros[i].getPosicao(), gerenciador.monstros[i].linha)){
+                                                        gerenciador.monstros[i].receberDano(disparo[c].dano);
+                                                        gerenciador.monstros[i].morrer();
+                                                        System.out.println("Vida do inimigo: " + gerenciador.monstros[i].getVida());
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else if((torres[q]!=null) && (gerenciador.monstros[i].getPosicao() == torres[q].getColuna()) && (torres[q].temVida) && (gerenciador.monstros[i].linha == torres[q].linha)) {
                                             gerenciador.monstros[i].receberDano(torres[q].dano);
                                             gerenciador.monstros[i].morrer();
                                             torres[q].receberDano(gerenciador.monstros[i].dano);
@@ -136,7 +156,6 @@ public class Main {
                         caminhos[i].limpar();
                         for (int j = 0; j < 100; j++) {
                             Enemy m = gerenciador.monstros[j];
-                            //caminhos[i].limpar();
                             if (m != null && m.linha == i) {
 
                                 if (m.temVida) {
@@ -147,6 +166,12 @@ public class Main {
                             if (r != null && r.linha == i) {
                                 if (r.temVida) {
                                     caminhos[i].colocarTorre(r.getColuna());
+                                }
+                            }
+                            Disparo v = disparo[j];
+                            if (v != null && v.linha == i) {
+                                if (v.emTransito) {
+                                    caminhos[i].colocarDisparo(v.coluna);
                                 }
                             }
 

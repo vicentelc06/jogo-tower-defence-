@@ -23,6 +23,10 @@ public class Caminho {
         trilha[coluna] = 'T';
     }
 
+    public void colocarDisparo(int coluna){
+        trilha[coluna] = '>';
+    }
+
     public void limpar() {
         for (int i = 0; i < tamanho; i++) {
             trilha[i] = '.';
