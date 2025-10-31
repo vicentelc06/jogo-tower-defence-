@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 public class Main {
-    //cara
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -34,7 +34,7 @@ public class Main {
             }
 
 
-            int a = 0;
+            int a = 1;
             while ((base.vida>0)&&(a<4)) {
 
 
@@ -155,6 +155,13 @@ public class Main {
                     for (int i = 0; i < 3; i++) {
                         caminhos[i].limpar();
                         for (int j = 0; j < 100; j++) {
+
+                            Disparo v = disparo[j];
+                            if (v != null && v.linha == i) {
+                                if (v.emTransito) {
+                                    caminhos[i].colocarDisparo(v.getColuna());
+                                }
+                            }
                             Enemy m = gerenciador.monstros[j];
                             if (m != null && m.linha == i) {
 
@@ -166,12 +173,6 @@ public class Main {
                             if (r != null && r.linha == i) {
                                 if (r.temVida) {
                                     caminhos[i].colocarTorre(r.getColuna());
-                                }
-                            }
-                            Disparo v = disparo[j];
-                            if (v != null && v.linha == i) {
-                                if (v.emTransito) {
-                                    caminhos[i].colocarDisparo(v.coluna);
                                 }
                             }
 
