@@ -19,12 +19,11 @@ public class Main {
             Base base = new Base(10);
             int tick = 0;
             Moeda moeda = new Moeda(10);
-            int onda = 1;
             WaveManager gerenciador = new WaveManager();
             Torre[] torres = new Torre[100];
-            int t = 0;
+            int contTorres = 0;
             Disparo[] disparo = new Disparo[200];
-            int d = 0;
+            int contDisparo = 0;
             boolean rodando = true;
 
             Caminho[] caminhos = new Caminho[3];
@@ -34,8 +33,8 @@ public class Main {
             }
 
 
-            int a = 1;
-            while ((base.vida>0)&&(a<4)) {
+            int contWaves = 1;
+            while ((base.vida>0)&&(contWaves <4)) {
 
 
                 System.out.println("======================");
@@ -62,8 +61,8 @@ public class Main {
                                     System.out.println("Coluna inválida. Tente novamente: ");
                                     colunaDaTorre = scanner.nextInt() - 1;
                                 }
-                                torres[t] = new TorreTipo1(linhaDaTorre, colunaDaTorre);
-                                t++;
+                                torres[contTorres] = new TorreTipo1(linhaDaTorre, colunaDaTorre);
+                                contTorres++;
                             } else {
                                 System.out.println("Diheiro insuficiente!");
                             }
@@ -82,8 +81,8 @@ public class Main {
                                     System.out.println("Coluna inválida. Tente novamente: ");
                                     colunaDaTorre = scanner.nextInt() - 1;
                                 }
-                                torres[t] = new TorreTipo2(linhaDaTorre, colunaDaTorre);
-                                t++;
+                                torres[contTorres] = new TorreTipo2(linhaDaTorre, colunaDaTorre);
+                                contTorres++;
                             } else {
                                 System.out.println("Diheiro insuficiente!");
                             }
@@ -97,7 +96,7 @@ public class Main {
                 }
 
                 rodando = true;
-                gerenciador.ondas(a);
+                gerenciador.ondas(contWaves);
 
 
                 while (base.vida > 0 && rodando) {
@@ -116,8 +115,8 @@ public class Main {
                                     for (int q=0;q<100;q++) {
                                         if ((torres[q] != null) && (gerenciador.monstros[i].linha == torres[q].linha) && (gerenciador.monstros[i].getPosicao() != torres[q].coluna) && (torres[q].temVida)){
                                             if (tick % 2 == 0){
-                                                disparo[d] = new Disparo(torres[q].getLinha(), torres[q].getColuna(), torres[q].getDano());
-                                                d++;
+                                                disparo[contDisparo] = new Disparo(torres[q].getLinha(), torres[q].getColuna(), torres[q].getDano());
+                                                contDisparo++;
                                             }
                                             for(int c = 0; c < 200; c++){
                                                 if (disparo[c] != null && disparo[c].emTransito){
@@ -177,7 +176,7 @@ public class Main {
                             }
 
                         }
-                        caminhos[i].exibir(); // exibe a linha depois de colocar todos os monstros
+                        caminhos[i].exibir(); // exibe contWaves linha depois de colocar todos os monstros
                     }
 
                     System.out.println("VIDA: " + base.vida + " MOEDAS: " + moeda.getMoeda());
@@ -188,10 +187,10 @@ public class Main {
                         e.printStackTrace();
                     }
                 }
-                a++;
+                contWaves++;
 
             }
-            if (a<=3){
+            if (contWaves <=3){
                 System.out.println("você perdeu!!");
             }
             else{
