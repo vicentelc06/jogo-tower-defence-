@@ -1,10 +1,10 @@
 package default_package;
 
-public class TorreTipo2 extends Torre{
+public class Inseticida extends Torre{
 
     int custo;
 
-    public TorreTipo2(int linha, int coluna) {
+    public Inseticida(int linha, int coluna) {
         super(linha, coluna);
         this.vida = 6;
         this.dano = 1;

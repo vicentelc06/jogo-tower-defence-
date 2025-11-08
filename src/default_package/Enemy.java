@@ -7,6 +7,7 @@ public class Enemy {
     int lugar;
     boolean temVida;
     int velocidade;
+    int valor;
 
     public Enemy(int linha, int lugar){
         this.linha=linha;
@@ -33,6 +34,8 @@ public class Enemy {
     }
 
     int getVida(){return vida;}
+
+    int getValor(){return valor;}
 
     void receberDano(int dano){vida -= dano;}
 

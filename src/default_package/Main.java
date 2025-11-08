@@ -18,7 +18,7 @@ public class Main {
 
             Base base = new Base(10);
             int tick = 0;
-            Moeda moeda = new Moeda(10);
+            Moeda moeda = new Moeda(20);
             WaveManager gerenciador = new WaveManager();
             Torre[] torres = new Torre[100];
             int contTorres = 0;
@@ -26,15 +26,15 @@ public class Main {
             int contDisparo = 0;
             boolean rodando = true;
 
-            Caminho[] caminhos = new Caminho[3];
+            Caminho[] caminhos = new Caminho[6];
 
-            for (int i = 0; i < 3; i++) {
-                caminhos[i] = new Caminho(10);
+            for (int i = 0; i < 6; i++) {
+                caminhos[i] = new Caminho(14);
             }
 
 
             int contWaves = 1;
-            while ((base.vida>0)&&(contWaves <4)) {
+            while ((base.vida>0)&&(contWaves <10)) {
 
 
                 System.out.println("======================");
@@ -48,10 +48,10 @@ public class Main {
                     int tipo = scanner.nextInt();
                     switch (tipo) {
                         case 1:
-                            if (moeda.comprar(4)) {
+                            if (moeda.comprar(5)) {
                                 System.out.println("Linha: ");
                                 int linhaDaTorre = scanner.nextInt() - 1;
-                                while (linhaDaTorre < 0 || linhaDaTorre > 2) {
+                                while (linhaDaTorre < 0 || linhaDaTorre > 5) {
                                     System.out.println("Linha inválida. Tente novamente: ");
                                     linhaDaTorre = scanner.nextInt() - 1;
                                 }
@@ -61,7 +61,7 @@ public class Main {
                                     System.out.println("Coluna inválida. Tente novamente: ");
                                     colunaDaTorre = scanner.nextInt() - 1;
                                 }
-                                torres[contTorres] = new TorreTipo1(linhaDaTorre, colunaDaTorre);
+                                torres[contTorres] = new Laser(linhaDaTorre, colunaDaTorre);
                                 contTorres++;
                             } else {
                                 System.out.println("Diheiro insuficiente!");
@@ -71,7 +71,7 @@ public class Main {
                             if (moeda.comprar(3)) {
                                 System.out.println("Linha: ");
                                 int linhaDaTorre = scanner.nextInt() - 1;
-                                while (linhaDaTorre < 0|| linhaDaTorre > 2) {
+                                while (linhaDaTorre < 0|| linhaDaTorre > 5) {
                                     System.out.println("Linha inválida. Tente novamente: ");
                                     linhaDaTorre = scanner.nextInt() - 1;
                                 }
@@ -81,10 +81,30 @@ public class Main {
                                     System.out.println("Coluna inválida. Tente novamente: ");
                                     colunaDaTorre = scanner.nextInt() - 1;
                                 }
-                                torres[contTorres] = new TorreTipo2(linhaDaTorre, colunaDaTorre);
+                                torres[contTorres] = new Inseticida(linhaDaTorre, colunaDaTorre);
                                 contTorres++;
                             } else {
                                 System.out.println("Diheiro insuficiente!");
+                            }
+                            break;
+                        case 3:
+                            if(moeda.comprar(4)){
+                                int linhaDaTorre = scanner.nextInt() - 1;
+                                while (linhaDaTorre < 0|| linhaDaTorre > 5) {
+                                    System.out.println("Linha inválida. Tente novamente: ");
+                                    linhaDaTorre = scanner.nextInt() - 1;
+                                }
+                                System.out.println("Coluna: ");
+                                int colunaDaTorre = scanner.nextInt() - 1;
+                                while (colunaDaTorre < 0 || colunaDaTorre > 2) {
+                                    System.out.println("Coluna inválida. Tente novamente: ");
+                                    colunaDaTorre = scanner.nextInt() - 1;
+                                }
+                                torres[contTorres] = new Raquete(linhaDaTorre, colunaDaTorre);
+                                contTorres++;
+                            }
+                            else {
+                                System.out.println("Dinehiro insuficiente!");
                             }
                             break;
                         default:
@@ -102,7 +122,7 @@ public class Main {
                 while (base.vida > 0 && rodando) {
                     rodando = false;
                     tick ++;
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 0; i < 100; i++) {
                         if (gerenciador.monstros[i] != null) {
                             rodando = true;
                             boolean anda = true;
@@ -145,13 +165,13 @@ public class Main {
                                 }
 
                             } else {
+                                moeda.ganhar(gerenciador.monstros[i].getValor());
                                 gerenciador.monstros[i] = null;
-                                moeda.ganhar(6);
                             }
                         }
                     }
 
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < 6; i++) {
                         caminhos[i].limpar();
                         for (int j = 0; j < 100; j++) {
 
@@ -190,7 +210,7 @@ public class Main {
                 contWaves++;
 
             }
-            if (contWaves <=3){
+            if (contWaves <=10){
                 System.out.println("você perdeu!!");
             }
             else{

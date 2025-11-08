@@ -1,14 +1,13 @@
 package default_package;
 
-public class TorreTipo1 extends Torre {
+public class Raquete extends Torre{
 
     int custo;
 
-    public TorreTipo1(int linha, int coluna) {
+    public Raquete(int linha, int coluna) {
         super(linha, coluna);
-        this.vida = 10;
+        this.vida = 8;
         this.dano = 2;
         this.custo = 4;
     }
-
 }
