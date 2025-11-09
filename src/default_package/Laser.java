@@ -6,7 +6,7 @@ public class Laser extends Torre {
 
     public Laser(int linha, int coluna) {
         super(linha, coluna);
-        this.vida = 10;
+        this.vida = 12;
         this.dano = 2;
         this.custo = 5;
     }

@@ -23,7 +23,9 @@ public class Enemy {
     }
 
     void caminharDoElemento(){
-        lugar -= this.velocidade;
+       if (this.temVida){
+           lugar -= this.velocidade;
+       }
         if (lugar<0) {
             lugar=0;
         }

@@ -20,7 +20,7 @@ public class Main {
             int tick = 0;
             Moeda moeda = new Moeda(20);
             WaveManager gerenciador = new WaveManager();
-            Torre[] torres = new Torre[100];
+            Torre[] torres = new Torre[200];
             int contTorres = 0;
             Disparo[] disparo = new Disparo[200];
             int contDisparo = 0;
@@ -89,6 +89,7 @@ public class Main {
                             break;
                         case 3:
                             if(moeda.comprar(4)){
+                                System.out.println("Linha: ");
                                 int linhaDaTorre = scanner.nextInt() - 1;
                                 while (linhaDaTorre < 0|| linhaDaTorre > 5) {
                                     System.out.println("Linha inválida. Tente novamente: ");
@@ -129,27 +130,52 @@ public class Main {
 
                             if (gerenciador.monstros[i].temVida) {
                                 if (gerenciador.monstros[i].getPosicao() == base.getPosicao()) {
-                                    base.receberDano(gerenciador.monstros[i].dano);
+
+                                    for (int q = 0; q < 100; q++) {
+                                        if ((torres[q] != null) && (torres[q].temVida)) {
+                                            if ((gerenciador.monstros[i].linha == torres[q].linha) && (gerenciador.monstros[i].getPosicao() <= torres[q].getColuna())) {
+
+                                                gerenciador.monstros[i].lugar = torres[q].getColuna();
+                                            }
+                                        }
+                                    }
+                                    if (gerenciador.monstros[i].getPosicao() == base.getPosicao()) {
+
+                                        base.receberDano(gerenciador.monstros[i].dano);
+                                        //anda = false;
+                                    }
+
                                     anda = false;
+
                                 } else {// ((gerenciador.monstros[i].getPosicao() == torres[i].getColuna()) && (torres[i].temVida) && (gerenciador.monstros[i].linha == torres[i].linha)) {
-                                    for (int q=0;q<100;q++) {
-                                        if ((torres[q] != null) && (gerenciador.monstros[i].linha == torres[q].linha) && (gerenciador.monstros[i].getPosicao() != torres[q].coluna) && (torres[q].temVida)){
-                                            if (tick % 2 == 0){
+                                    for (int q = 0; q < 100; q++) {
+                                        if ((torres[q] != null) && (gerenciador.monstros[i] != null) && (gerenciador.monstros[i].linha == torres[q].linha) && (gerenciador.monstros[i].getPosicao() != torres[q].coluna) && (torres[q].temVida)) {
+                                            if (tick % 2 == 0) {
                                                 disparo[contDisparo] = new Disparo(torres[q].getLinha(), torres[q].getColuna(), torres[q].getDano());
                                                 contDisparo++;
                                             }
-                                            for(int c = 0; c < 200; c++){
-                                                if (disparo[c] != null && disparo[c].emTransito){
+                                            for (int c = 0; c < 200; c++) {
+                                                if (disparo[c] != null && disparo[c].emTransito) {
                                                     disparo[c].andar();
-                                                    if (disparo[c].atingir(gerenciador.monstros[i].getPosicao(), gerenciador.monstros[i].linha)){
+
+                                                    if (disparo[c].getColuna()>= 14){
+                                                        disparo[c] = null;
+                                                    }
+
+                                                    if ((disparo[c] != null) && (disparo[c].atingir(gerenciador.monstros[i].getPosicao(), gerenciador.monstros[i].linha))) {
                                                         gerenciador.monstros[i].receberDano(disparo[c].dano);
                                                         gerenciador.monstros[i].morrer();
                                                         System.out.println("Vida do inimigo: " + gerenciador.monstros[i].getVida());
                                                     }
                                                 }
                                             }
-                                        }
-                                        else if((torres[q]!=null) && (gerenciador.monstros[i].getPosicao() == torres[q].getColuna()) && (torres[q].temVida) && (gerenciador.monstros[i].linha == torres[q].linha)) {
+
+                                        } else if ((torres[q] != null) && (gerenciador.monstros[i] != null) && (gerenciador.monstros[i].getPosicao() <= torres[q].getColuna()) && (torres[q].temVida) && (gerenciador.monstros[i].linha == torres[q].linha)) {
+
+                                            if (gerenciador.monstros[i].getPosicao() < torres[q].getColuna()) {
+                                                gerenciador.monstros[i].lugar = torres[q].getColuna();
+                                            }
+
                                             gerenciador.monstros[i].receberDano(torres[q].dano);
                                             gerenciador.monstros[i].morrer();
                                             torres[q].receberDano(gerenciador.monstros[i].dano);
@@ -161,8 +187,8 @@ public class Main {
                                     }
                                 }
                                 if (anda==true) {
-                                    gerenciador.monstros[i].caminharDoElemento();
-                                }
+                                   gerenciador.monstros[i].caminharDoElemento();
+                            }
 
                             } else {
                                 moeda.ganhar(gerenciador.monstros[i].getValor());
@@ -173,7 +199,7 @@ public class Main {
 
                     for (int i = 0; i < 6; i++) {
                         caminhos[i].limpar();
-                        for (int j = 0; j < 100; j++) {
+                        for (int j = 0; j < 200; j++) {
 
                             Disparo v = disparo[j];
                             if (v != null && v.linha == i) {
@@ -182,14 +208,14 @@ public class Main {
                                 }
                             }
                             Enemy m = gerenciador.monstros[j];
-                            if (m != null && m.linha == i) {
+                            if ((m != null && m.linha == i) && (j<=100)) {
 
                                 if (m.temVida) {
                                     caminhos[i].colocarInimigo(m.getPosicao());
                                 }
                             }
                             Torre r = torres[j];
-                            if (r != null && r.linha == i) {
+                            if ((r != null && r.linha == i) && (j<=100)) {
                                 if (r.temVida) {
                                     caminhos[i].colocarTorre(r.getColuna());
                                 }
@@ -210,7 +236,7 @@ public class Main {
                 contWaves++;
 
             }
-            if (contWaves <=10){
+            if (contWaves <10){
                 System.out.println("você perdeu!!");
             }
             else{

@@ -2,7 +2,7 @@ package default_package;
 
 public class WaveManager {
 
-    Enemy[] monstros = new Enemy[100];
+    Enemy[] monstros = new Enemy[200];
     int i = 0;
 
 
@@ -14,7 +14,7 @@ public class WaveManager {
 
             monstros[0] = new Mariposa(3,10);
             monstros[1] = new Barata(1,8);
-            monstros[2]= new Mariposa(2,7);
+            monstros[2]= new Mariposa(2,9);
             monstros[3] = new Barata(5, 12);
             monstros[4] = new Mariposa(5, 8);
 

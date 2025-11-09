@@ -6,7 +6,7 @@ public class Inseticida extends Torre{
 
     public Inseticida(int linha, int coluna) {
         super(linha, coluna);
-        this.vida = 6;
+        this.vida = 8;
         this.dano = 1;
         this.custo = 3;
     }

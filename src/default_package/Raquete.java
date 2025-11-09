@@ -6,8 +6,8 @@ public class Raquete extends Torre{
 
     public Raquete(int linha, int coluna) {
         super(linha, coluna);
-        this.vida = 8;
-        this.dano = 2;
+        this.vida = 10;
+        this.dano = 4;
         this.custo = 4;
     }
 }
