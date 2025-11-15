@@ -6,11 +6,15 @@ public class Torre {
     int coluna;
     int dano;
     boolean temVida;
+    int nivel;
+    boolean burn;
 
     public Torre(int linha, int coluna){
         this.linha = linha;
         this.coluna = coluna;
         this.temVida = true;
+        this.nivel = 1;
+        this.burn = false;
     }
 
     void morrer(){
@@ -20,6 +24,12 @@ public class Torre {
     }
 
     void receberDano(int dano){vida -= dano;}
+
+    void upgrade(){
+        nivel =+ 1;
+        vida =+ 4;
+        dano =+ 1;
+    }
 
     int getColuna(){return coluna;}
     int getLinha(){return linha;}

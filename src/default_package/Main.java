@@ -116,6 +116,44 @@ public class Main {
                     comprar = scanner.nextInt();
                 }
 
+                if(contWaves >= 2){
+
+                    System.out.println("======================");
+                    System.out.print("Digite '0' para fazer upgrade nas suas torres");
+                    int upgrade = scanner.nextInt();
+                    System.out.println("======================");
+
+                    while(upgrade == 0){
+
+                        System.out.println("Moedas: " + moeda.getMoeda());
+                        System.out.println("Linha da torre desejada: ");
+                        int linhaDaTorre = scanner.nextInt() - 1;
+                        System.out.println("Coluna da torre desejada: ");
+                        int colunaDaTorre = scanner.nextInt() - 1;
+                        boolean encontrada = false;
+
+                        for(int i = 0; i < 200; i++){
+                            if(torres[i] != null) {
+                                if (torres[i].linha == linhaDaTorre && torres[i].coluna == colunaDaTorre) {
+                                    if (moeda.comprar(5) && torres[i].nivel < 5) {
+                                        torres[i].upgrade();
+                                        encontrada = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        if(!encontrada){
+                            System.out.println("Torre não encontrada.");
+                        }
+
+                        System.out.println("Moedas: " + moeda.getMoeda());
+                        System.out.print("Digite '0' para fazer mais upgrades");
+                        upgrade = scanner.nextInt();
+
+                    }
+                }
+
                 rodando = true;
                 gerenciador.ondas(contWaves);
 
@@ -151,7 +189,7 @@ public class Main {
                                     for (int q = 0; q < 100; q++) {
                                         if ((torres[q] != null) && (gerenciador.monstros[i] != null) && (gerenciador.monstros[i].linha == torres[q].linha) && (gerenciador.monstros[i].getPosicao() != torres[q].coluna) && (torres[q].temVida)) {
                                             if (tick % 2 == 0) {
-                                                disparo[contDisparo] = new Disparo(torres[q].getLinha(), torres[q].getColuna(), torres[q].getDano());
+                                                disparo[contDisparo] = new Disparo(torres[q].getLinha(), torres[q].getColuna(), torres[q].getDano(), torres[q].burn);
                                                 contDisparo++;
                                             }
                                             for (int c = 0; c < 200; c++) {

@@ -6,12 +6,14 @@ public class Disparo{
     int linha;
     int coluna;
     int dano;
+    boolean burn;
 
-    public Disparo(int linha, int coluna, int dano) {
+    public Disparo(int linha, int coluna, int dano, boolean burn) {
         this.linha = linha;
         this.coluna = coluna;
         this.dano = dano;
         this.emTransito = true;
+        this.burn = burn;
     }
 
     void andar(){
