@@ -11,9 +11,9 @@ public class Laser extends Torre {
 
     @Override
     void upgrade(){
-        nivel =+ 1;
-        vida =+ 4;
-        dano =+ 1;
+        nivel += 1;
+        vida += 4;
+        dano += 1;
         if (nivel >= 3){
             burn = true;
         }

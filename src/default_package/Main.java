@@ -135,8 +135,9 @@ public class Main {
                         for(int i = 0; i < 200; i++){
                             if(torres[i] != null) {
                                 if (torres[i].linha == linhaDaTorre && torres[i].coluna == colunaDaTorre) {
-                                    if (moeda.comprar(5) && torres[i].nivel < 5) {
+                                    if (moeda.comprar(4) && torres[i].nivel < 5) {
                                         torres[i].upgrade();
+                                        System.out.println("UPGRADE REALIZADO");
                                         encontrada = true;
                                     }
                                 }
@@ -167,6 +168,12 @@ public class Main {
                             boolean anda = true;
 
                             if (gerenciador.monstros[i].temVida) {
+
+                                if (gerenciador.monstros[i].queimado){
+                                    gerenciador.monstros[i].receberDano(1);
+                                    System.out.println("inimigo recebeu dano do fogo!");
+                                }
+
                                 if (gerenciador.monstros[i].getPosicao() == base.getPosicao()) {
 
                                     for (int q = 0; q < 100; q++) {
@@ -204,6 +211,11 @@ public class Main {
                                                         gerenciador.monstros[i].receberDano(disparo[c].dano);
                                                         gerenciador.monstros[i].morrer();
                                                         System.out.println("Vida do inimigo: " + gerenciador.monstros[i].getVida());
+
+                                                        if ((disparo[c].burn) && (!gerenciador.monstros[i].queimado)){
+                                                            gerenciador.monstros[i].queimado=true;
+                                                            System.out.println("O inimigo foi queimado");
+                                                        }
                                                     }
                                                 }
                                             }
