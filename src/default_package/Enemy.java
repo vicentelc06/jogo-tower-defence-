@@ -8,6 +8,7 @@ public class Enemy {
     boolean temVida;
     int velocidade;
     int valor;
+    boolean queimado;
 
     public Enemy(int linha, int lugar){
         this.linha=linha;

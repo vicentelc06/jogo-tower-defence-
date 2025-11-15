@@ -6,11 +6,13 @@ public class Torre {
     int coluna;
     int dano;
     boolean temVida;
+    boolean burn ;
 
     public Torre(int linha, int coluna){
         this.linha = linha;
         this.coluna = coluna;
         this.temVida = true;
+        this.burn = false;
     }
 
     void morrer(){

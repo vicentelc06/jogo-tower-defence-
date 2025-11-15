@@ -129,6 +129,13 @@ public class Main {
                             boolean anda = true;
 
                             if (gerenciador.monstros[i].temVida) {
+
+                                if (gerenciador.monstros[i].queimado){
+                                    gerenciador.monstros[i].receberDano(1);
+                                    System.out.println("inimigo recebeu dano do fogo!");
+                                }
+
+
                                 if (gerenciador.monstros[i].getPosicao() == base.getPosicao()) {
 
                                     for (int q = 0; q < 100; q++) {
@@ -151,7 +158,7 @@ public class Main {
                                     for (int q = 0; q < 100; q++) {
                                         if ((torres[q] != null) && (gerenciador.monstros[i] != null) && (gerenciador.monstros[i].linha == torres[q].linha) && (gerenciador.monstros[i].getPosicao() != torres[q].coluna) && (torres[q].temVida)) {
                                             if (tick % 2 == 0) {
-                                                disparo[contDisparo] = new Disparo(torres[q].getLinha(), torres[q].getColuna(), torres[q].getDano());
+                                                disparo[contDisparo] = new Disparo(torres[q].getLinha(), torres[q].getColuna(), torres[q].getDano(),torres[q].burn);
                                                 contDisparo++;
                                             }
                                             for (int c = 0; c < 200; c++) {
@@ -166,6 +173,10 @@ public class Main {
                                                         gerenciador.monstros[i].receberDano(disparo[c].dano);
                                                         gerenciador.monstros[i].morrer();
                                                         System.out.println("Vida do inimigo: " + gerenciador.monstros[i].getVida());
+                                                        if ((disparo[c].burn) && (!gerenciador.monstros[i].queimado)){
+                                                            gerenciador.monstros[i].queimado=true;
+                                                            System.out.println("O inimigo foi queimado");
+                                                        }
                                                     }
                                                 }
                                             }
@@ -225,6 +236,8 @@ public class Main {
                         caminhos[i].exibir(); // exibe contWaves linha depois de colocar todos os monstros
                     }
 
+                    //for
+
                     System.out.println("VIDA: " + base.vida + " MOEDAS: " + moeda.getMoeda());
                     System.out.println("======================================");
                     try {
@@ -232,6 +245,8 @@ public class Main {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+
+
                 }
                 contWaves++;
 
