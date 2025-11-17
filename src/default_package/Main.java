@@ -48,7 +48,8 @@ public class Main {
                     int tipo = scanner.nextInt();
                     switch (tipo) {
                         case 1:
-                            if (moeda.comprar(5)) {
+                            try {
+                                moeda.comprar(Constantes.CUSTO_TORRE_1);
                                 System.out.println("Linha: ");
                                 int linhaDaTorre = scanner.nextInt() - 1;
                                 while (linhaDaTorre < 0 || linhaDaTorre > 5) {
@@ -63,12 +64,13 @@ public class Main {
                                 }
                                 torres[contTorres] = new Laser(linhaDaTorre, colunaDaTorre);
                                 contTorres++;
-                            } else {
-                                System.out.println("Diheiro insuficiente!");
+                            } catch (RuntimeException e){
+                                System.out.println(e.getMessage());
                             }
                             break;
                         case 2:
-                            if (moeda.comprar(3)) {
+                            try {
+                                moeda.comprar(Constantes.CUSTO_TORRE_2);
                                 System.out.println("Linha: ");
                                 int linhaDaTorre = scanner.nextInt() - 1;
                                 while (linhaDaTorre < 0|| linhaDaTorre > 5) {
@@ -83,12 +85,13 @@ public class Main {
                                 }
                                 torres[contTorres] = new Inseticida(linhaDaTorre, colunaDaTorre);
                                 contTorres++;
-                            } else {
-                                System.out.println("Diheiro insuficiente!");
+                            } catch (RuntimeException e){
+                                System.out.println(e.getMessage());
                             }
                             break;
                         case 3:
-                            if(moeda.comprar(4)){
+                            try{
+                                moeda.comprar(Constantes.CUSTO_TORRE_3);
                                 System.out.println("Linha: ");
                                 int linhaDaTorre = scanner.nextInt() - 1;
                                 while (linhaDaTorre < 0|| linhaDaTorre > 5) {
@@ -104,8 +107,8 @@ public class Main {
                                 torres[contTorres] = new Raquete(linhaDaTorre, colunaDaTorre);
                                 contTorres++;
                             }
-                            else {
-                                System.out.println("Dinehiro insuficiente!");
+                            catch (RuntimeException e){
+                                System.out.println(e.getMessage());
                             }
                             break;
                         default:
@@ -135,15 +138,18 @@ public class Main {
                         for(int i = 0; i < 200; i++){
                             if(torres[i] != null) {
                                 if (torres[i].linha == linhaDaTorre && torres[i].coluna == colunaDaTorre) {
-                                    if (moeda.comprar(4) && torres[i].nivel < 5) {
+                                    encontrada = true;
+                                    try {
+                                        torres[i].validarUpgradePossivel();
+                                        moeda.comprar(Constantes.CUSTO_UPGRADE);
                                         torres[i].upgrade();
                                         System.out.println("UPGRADE REALIZADO");
-                                        encontrada = true;
+                                    }catch (RuntimeException e){
+                                        System.out.println(e.getMessage());
                                     }
                                 }
                             }
                         }
-
                         if(!encontrada){
                             System.out.println("Torre não encontrada.");
                         }

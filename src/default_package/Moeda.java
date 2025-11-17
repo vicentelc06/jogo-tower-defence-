@@ -12,15 +12,11 @@ public class Moeda {
         this.quantidade+=valor;
     }
 
-    boolean comprar(int custo){
-        if(custo > quantidade){
-            System.out.println("Diheiro insuficiente!");
-            return false;
+    void comprar(int custo){
+        if(custo > quantidade) {
+            throw new RuntimeException("Dinheiro insuficiente.");
         }
-        else{
-            this.quantidade -= custo;
-            return true;
-        }
+        this.quantidade -= custo;
     }
 
     int getMoeda(){

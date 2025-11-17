@@ -25,10 +25,16 @@ public class Torre {
 
     void receberDano(int dano){vida -= dano;}
 
+    void validarUpgradePossivel(){
+        if(this.nivel >= Constantes.NIVEL_MAXIMO_TORRES){
+            throw new RuntimeException("Torre já está no nível máximo.");
+        }
+    }
+
     void upgrade(){
-        nivel =+ 1;
-        vida =+ 4;
-        dano =+ 1;
+        nivel += 1;
+        vida += 4;
+        dano += 1;
     }
 
     int getColuna(){return coluna;}
