@@ -8,6 +8,7 @@ public class Lacraia extends Enemy{
         this.dano = 5;
         this.velocidade = 2;
         this.valor = 10;
+        this.resistente = true;
     }
 
 }

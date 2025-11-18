@@ -175,7 +175,7 @@ public class Main {
 
                             if (gerenciador.monstros[i].temVida) {
 
-                                if (gerenciador.monstros[i].queimado){
+                                if ((gerenciador.monstros[i].queimado) && (!gerenciador.monstros[i].resistente)){
                                     gerenciador.monstros[i].receberDano(1);
                                     System.out.println("inimigo recebeu dano do fogo!");
                                 }

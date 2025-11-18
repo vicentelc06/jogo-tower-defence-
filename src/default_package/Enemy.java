@@ -9,10 +9,13 @@ public class Enemy {
     int velocidade;
     int valor;
     boolean queimado;
+    boolean resistente;
+
     public Enemy(int linha, int lugar){
         this.linha=linha;
         this.lugar = lugar;
         this.temVida = true;
+        this.resistente = false;
 
     }
 
