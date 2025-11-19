@@ -1,9 +1,9 @@
 package default_package;
 
-public class Inseticida extends Torre{
+public class TorreTipo2 extends Torre{
 
 
-    public Inseticida(int linha, int coluna) {
+    public TorreTipo2(int linha, int coluna) {
         super(linha, coluna);
         this.vida = 8;
         this.dano = 1;

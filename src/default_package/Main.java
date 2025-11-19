@@ -62,7 +62,7 @@ public class Main {
                                     System.out.println("Coluna inválida. Tente novamente: ");
                                     colunaDaTorre = scanner.nextInt() - 1;
                                 }
-                                torres[contTorres] = new Laser(linhaDaTorre, colunaDaTorre);
+                                torres[contTorres] = new TorreTipo1(linhaDaTorre, colunaDaTorre);
                                 contTorres++;
                             } catch (RuntimeException e){
                                 System.out.println(e.getMessage());
@@ -83,7 +83,7 @@ public class Main {
                                     System.out.println("Coluna inválida. Tente novamente: ");
                                     colunaDaTorre = scanner.nextInt() - 1;
                                 }
-                                torres[contTorres] = new Inseticida(linhaDaTorre, colunaDaTorre);
+                                torres[contTorres] = new TorreTipo2(linhaDaTorre, colunaDaTorre);
                                 contTorres++;
                             } catch (RuntimeException e){
                                 System.out.println(e.getMessage());
@@ -104,7 +104,7 @@ public class Main {
                                     System.out.println("Coluna inválida. Tente novamente: ");
                                     colunaDaTorre = scanner.nextInt() - 1;
                                 }
-                                torres[contTorres] = new Raquete(linhaDaTorre, colunaDaTorre);
+                                torres[contTorres] = new TorreTipo3(linhaDaTorre, colunaDaTorre);
                                 contTorres++;
                             }
                             catch (RuntimeException e){

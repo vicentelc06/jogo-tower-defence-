@@ -1,8 +1,8 @@
 package default_package;
 
-public class Lacraia extends Enemy{
+public class InimigoTipo5 extends Enemy{
 
-    public Lacraia(int linha, int lugar) {
+    public InimigoTipo5(int linha, int lugar) {
         super(linha, lugar);
         this.vida = 26;
         this.dano = 5;

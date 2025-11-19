@@ -1,8 +1,8 @@
 package default_package;
 
-public class Laser extends Torre {
+public class TorreTipo1 extends Torre {
 
-    public Laser(int linha, int coluna) {
+    public TorreTipo1(int linha, int coluna) {
         super(linha, coluna);
         this.vida = 12;
         this.dano = 2;

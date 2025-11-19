@@ -1,9 +1,9 @@
 package default_package;
 
-public class Besouro extends Enemy {
+public class InimigoTipo3 extends Enemy {
 
 
-    public Besouro(int linha, int lugar) {
+    public InimigoTipo3(int linha, int lugar) {
         super(linha, lugar);
         this.vida = 24;
         this.dano = 2;

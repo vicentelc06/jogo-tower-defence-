@@ -1,8 +1,8 @@
 package default_package;
 
-public class Mariposa extends Enemy{
+public class InimigoTipo2 extends Enemy{
 
-    public Mariposa(int linha, int lugar) {
+    public InimigoTipo2(int linha, int lugar) {
         super(linha,lugar);
         this.vida = 8;
         this.dano = 1;
