@@ -40,11 +40,4 @@ public class Caminho {
         System.out.println();
     }
 
-    public void invocar(int linha, int lugar){
-
-        monstro[inim] = new Enemy(linha,lugar);
-        inim++;
-
-    }
-
 }

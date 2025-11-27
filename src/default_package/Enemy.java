@@ -1,6 +1,6 @@
 package default_package;
 
-public class Enemy {
+public abstract class Enemy {
     int vida;
     int dano;
     int linha;
@@ -19,30 +19,16 @@ public class Enemy {
 
     }
 
-    void morrer(){
-        if (this.vida <= 0){
-            System.out.println("Inimigo morto");
-            temVida = false;
-        }
-    }
+   public abstract void morrer();
 
-    void caminharDoElemento(){
-       if (this.temVida){
-           lugar -= this.velocidade;
-       }
-        if (lugar<0) {
-            lugar=0;
-        }
-    }
+    public abstract void caminharDoElemento();
 
-    int getPosicao(){
-        return lugar;
-    }
+    public abstract int getPosicao();
 
-    int getVida(){return vida;}
+    public abstract int getVida();
 
-    int getValor(){return valor;}
+    public abstract int getValor();
 
-    void receberDano(int dano){vida -= dano;}
+    public abstract void receberDano(int dano);
 
 }
