@@ -9,8 +9,7 @@ public class TorreTipo1 extends Torre {
         this.burn = false;
     }
 
-    @Override
-    void upgrade(){
+    public void upgrade(){
         nivel += 1;
         vida += 4;
         dano += 1;
@@ -19,4 +18,26 @@ public class TorreTipo1 extends Torre {
         }
     }
 
+
+    public  void morrer(){
+        if(this.vida <= 0){
+            this.temVida = false;
+        }
+    }
+
+    public  void receberDano(int dano){vida -= dano;}
+
+    public  void validarUpgradePossivel(){
+        if(this.nivel >= Constantes.NIVEL_MAXIMO_TORRES){
+            throw new RuntimeException("Torre já está no nível máximo.");
+        }
+    }
+
+
+    public  int getColuna(){return coluna;}
+    public  int getLinha(){return linha;}
+    public   int getVida(){return vida;}
+    public   int getDano(){return dano;}
 }
+
+

@@ -1,6 +1,6 @@
 package default_package;
 
-public class Torre {
+public abstract class Torre {
     int vida;
     int linha;
     int coluna;
@@ -17,30 +17,18 @@ public class Torre {
         this.burn = false;
     }
 
-    void morrer(){
-        if(this.vida <= 0){
-            this.temVida = false;
-        }
-    }
+   public abstract void morrer();
 
-    void receberDano(int dano){vida -= dano;}
+    public abstract void receberDano(int dano);
 
-    void validarUpgradePossivel(){
-        if(this.nivel >= Constantes.NIVEL_MAXIMO_TORRES){
-            throw new RuntimeException("Torre já está no nível máximo.");
-        }
-    }
+    public abstract void validarUpgradePossivel();
 
-    void upgrade(){
-        nivel += 1;
-        vida += 4;
-        dano += 1;
-    }
+    public abstract void upgrade();
 
-    int getColuna(){return coluna;}
-    int getLinha(){return linha;}
-    int getVida(){return vida;}
-    int getDano(){return dano;}
+    public abstract int getColuna();
+    public abstract int getLinha();
+    public abstract  int getVida();
+    public abstract  int getDano();
 }
 
 
