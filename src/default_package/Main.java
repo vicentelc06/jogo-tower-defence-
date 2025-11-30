@@ -7,7 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        TerminalWindow terminal = new TerminalWindow();
+        Scanner scanner = new Scanner(terminal.getInputStream());
         System.out.println("======================");
         System.out.print("Digite 'S' para iniciar o jogo");
         String iniciar = scanner.nextLine();
