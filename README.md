@@ -37,8 +37,6 @@ IDE: IntelliJ IDEA / Eclipse
 🔨 Em desenvolvimento:
 As próximas etapas incluem:
 
-- Implementar interface gráfica
+- Aprimorar interface gráfica
 
-- Adicionar novos tipos de torres e inimigos
-
-- Criar sistema de pontuação e fases
+- Balancear dificuldade
