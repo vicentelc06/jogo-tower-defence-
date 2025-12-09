@@ -13,10 +13,9 @@ import java.awt.image.BufferedImage;
 
 public class SpriteLoader {
     private static final HashMap<String, Image> cache = new HashMap<>();
-    public static final String SPRITE_DIR = "sprites"; // pasta onde colocar os PNGs
+    public static final String SPRITE_DIR = "sprites";
 
-    // nomes padrão que o código usa:
-    // grass.png, empty.png, enemy.png, tower1.png, tower2.png, tower3.png, shot.png
+
     public static void loadDefaultSprites() {
         load("grass.png");
         load("empty.png");

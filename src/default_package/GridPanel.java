@@ -55,7 +55,7 @@ public class GridPanel extends JPanel {
         Caminho[] caminhos = engine.getCaminhos();
 
         for (int linha = 0; linha < caminhos.length; linha++) {
-            char[] trilha = caminhos[linha].trilha; // package-private access OK (mesmo pacote)
+            char[] trilha = caminhos[linha].trilha;
             for (int col = 0; col < caminhos[0].tamanho; col++) {
                 char c = '.';
                 if (col < trilha.length) c = trilha[col];
@@ -63,13 +63,11 @@ public class GridPanel extends JPanel {
                 Image sprite = SpriteLoader.getSpriteForChar(c);
                 g.drawImage(sprite, col * TILE, linha * TILE, TILE, TILE, this);
 
-                // grid overlay
                 g.setColor(new Color(255, 255, 255, 30));
                 g.drawRect(col * TILE, linha * TILE, TILE, TILE);
             }
         }
 
-        // HUD simples
         g.setColor(Color.WHITE);
         g.setFont(new Font("Consolas", Font.BOLD, 14));
         g.drawString("Vida: " + engine.getBase().vida, 8, getHeight() - 36);

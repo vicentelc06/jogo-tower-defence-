@@ -202,7 +202,6 @@ public class GameEngine {
             }
         }
 
-        // atualiza os caminhos — SEM PRINTS
         for (int i = 0; i < 6; i++) {
             caminhos[i].limpar();
 
@@ -225,7 +224,6 @@ public class GameEngine {
             }
         }
 
-        // fim da onda
         boolean anyAlive = false;
         for (int i = 0; i < gerenciador.monstros.length && i < 100; i++) {
             Enemy m = gerenciador.monstros[i];

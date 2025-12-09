@@ -26,7 +26,6 @@ public class GamePanel extends JPanel {
         int cellW = getWidth() / colunas;
         int cellH = getHeight() / linhas;
 
-        // desenha grid
         g.setColor(Color.WHITE);
         for (int i = 0; i <= linhas; i++)
             g.drawLine(0, i * cellH, getWidth(), i * cellH);
@@ -34,7 +33,6 @@ public class GamePanel extends JPanel {
         for (int j = 0; j <= colunas; j++)
             g.drawLine(j * cellW, 0, j * cellW, getHeight());
 
-        // desenha os elementos dos caminhos
         Caminho[] caminhos = engine.getCaminhos();
         if (caminhos == null) return;
 
@@ -46,15 +44,12 @@ public class GamePanel extends JPanel {
 
                 char simbolo = trilha[col];
 
-                // pegue a imagem correspondente
                 Image sprite = SpriteLoader.getSpriteForChar(simbolo);
                 if (sprite == null) continue;
 
-                // coordenadas
                 int x = col * cellW;
                 int y = linha * cellH;
 
-                // desenha o sprite
                 g.drawImage(sprite, x, y, cellW, cellH, null);
             }
         }
