@@ -44,7 +44,7 @@ public class Main {
                 System.out.println("======================");
 
                 while (comprar == 0) {
-                    System.out.println("Moedas: " + moeda.getMoeda());
+                     System.out.println("Moedas: " + moeda.getMoeda());
                     System.out.println("Digite o tipo de torre desejada: ");
                     int tipo = scanner.nextInt();
                     switch (tipo) {

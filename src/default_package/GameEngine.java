@@ -3,7 +3,7 @@ package default_package;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class GameEngine {
+public class  GameEngine {
 
     public Base base;
     public Moeda moeda;
