@@ -1,20 +1,35 @@
 package default_package;
-import java.util.Scanner;
+import default_package.interface_grafica.Compras;
+import default_package.interface_grafica.FrameBase;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 
 public class Main {
 
+
+    static FrameBase frameBase = new FrameBase();
+
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("======================");
-        System.out.print("Digite 'S' para iniciar o jogo");
-        String iniciar = scanner.nextLine();
-        System.out.println("======================");
 
+        while (!frameBase.getStart()) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
-        if (iniciar.equalsIgnoreCase("s")) {
+        iniciarJogo();
+
+    }
+
+        private static void iniciarJogo () {
+
+            Scanner scanner = new Scanner(System.in);
 
             Base base = new Base(10);
             int tick = 0;
@@ -26,107 +41,112 @@ public class Main {
             int contDisparo = 0;
             boolean rodando = true;
 
-            Caminho[] caminhos = new Caminho[6];
+            frameBase.setQuantidadeMoedas(moeda.quantidade);
+            frameBase.setVidaDaBase(base.vida);
 
-            for (int i = 0; i < 6; i++) {
-                caminhos[i] = new Caminho(14);
+
+            Caminho[] caminhos = new Caminho[Constantes.CAMINHOS_LINHAS];
+
+            for (int i = 0; i < Constantes.CAMINHOS_LINHAS; i++) {
+                caminhos[i] = new Caminho(Constantes.CAMINHOS_COLUNAS);
             }
 
 
             int contWaves = 1;
-            while ((base.vida>0)&&(contWaves <10)) {
+            while ((base.vida > 0) && (contWaves < 10)) {
 
+                Compras compras = new Compras();
 
-                System.out.println("======================");
-                System.out.print("Digite '0' para comprar torres");
-                int comprar = scanner.nextInt();
-                System.out.println("======================");
+                while(compras.getIsOpen()){
 
-                while (comprar == 0) {
-                    System.out.println("Moedas: " + moeda.getMoeda());
-                    System.out.println("Digite o tipo de torre desejada: ");
-                    int tipo = scanner.nextInt();
-                    switch (tipo) {
-                        case 1:
-                            try {
-                                moeda.comprar(Constantes.CUSTO_TORRE_1);
-                                System.out.println("Linha: ");
-                                int linhaDaTorre = scanner.nextInt() - 1;
-                                while (linhaDaTorre < 0 || linhaDaTorre > 5) {
-                                    System.out.println("Linha inválida. Tente novamente: ");
-                                    linhaDaTorre = scanner.nextInt() - 1;
+                        System.out.println("Moedas: " + moeda.getMoeda());
+
+                        int tipo = compras.getTipo();
+
+                        switch (tipo) {
+                            case 1:
+                                try {
+                                    moeda.comprar(Constantes.CUSTO_TORRE_1);
+                                    frameBase.setQuantidadeMoedas(moeda.quantidade);
+                                    System.out.println("Linha: ");
+                                    int linhaDaTorre = scanner.nextInt() - 1;
+                                    while (linhaDaTorre < 0 || linhaDaTorre > 5) {
+                                        System.out.println("Linha inválida. Tente novamente: ");
+                                        linhaDaTorre = scanner.nextInt() - 1;
+                                    }
+                                    System.out.println("Coluna: ");
+                                    int colunaDaTorre = scanner.nextInt() - 1;
+                                    while (colunaDaTorre < 1 || colunaDaTorre > 3) {
+                                        System.out.println("Coluna inválida. Tente novamente: ");
+                                        colunaDaTorre = scanner.nextInt() - 1;
+                                    }
+                                    torres[contTorres] = new TorreTipo1(linhaDaTorre, colunaDaTorre);
+                                    contTorres++;
+                                } catch (RuntimeException e) {
+                                    System.out.println(e.getMessage());
                                 }
-                                System.out.println("Coluna: ");
-                                int colunaDaTorre = scanner.nextInt() - 1;
-                                while (colunaDaTorre < 0 || colunaDaTorre > 2) {
-                                    System.out.println("Coluna inválida. Tente novamente: ");
-                                    colunaDaTorre = scanner.nextInt() - 1;
+                                break;
+                            case 2:
+                                try {
+                                    moeda.comprar(Constantes.CUSTO_TORRE_2);
+                                    frameBase.setQuantidadeMoedas(moeda.quantidade);
+                                    System.out.println("Linha: ");
+                                    int linhaDaTorre = scanner.nextInt() - 1;
+                                    while (linhaDaTorre < 0 || linhaDaTorre > 5) {
+                                        System.out.println("Linha inválida. Tente novamente: ");
+                                        linhaDaTorre = scanner.nextInt() - 1;
+                                    }
+                                    System.out.println("Coluna: ");
+                                    int colunaDaTorre = scanner.nextInt() - 1;
+                                    while (colunaDaTorre < 1 || colunaDaTorre > 3) {
+                                        System.out.println("Coluna inválida. Tente novamente: ");
+                                        colunaDaTorre = scanner.nextInt() - 1;
+                                    }
+                                    torres[contTorres] = new TorreTipo2(linhaDaTorre, colunaDaTorre);
+                                    contTorres++;
+                                } catch (RuntimeException e) {
+                                    System.out.println(e.getMessage());
                                 }
-                                torres[contTorres] = new TorreTipo1(linhaDaTorre, colunaDaTorre);
-                                contTorres++;
-                            } catch (RuntimeException e){
-                                System.out.println(e.getMessage());
-                            }
-                            break;
-                        case 2:
-                            try {
-                                moeda.comprar(Constantes.CUSTO_TORRE_2);
-                                System.out.println("Linha: ");
-                                int linhaDaTorre = scanner.nextInt() - 1;
-                                while (linhaDaTorre < 0|| linhaDaTorre > 5) {
-                                    System.out.println("Linha inválida. Tente novamente: ");
-                                    linhaDaTorre = scanner.nextInt() - 1;
+                                break;
+                            case 3:
+                                try {
+                                    moeda.comprar(Constantes.CUSTO_TORRE_3);
+                                    frameBase.setQuantidadeMoedas(moeda.quantidade);
+                                    System.out.println("Linha: ");
+                                    int linhaDaTorre = scanner.nextInt() - 1;
+                                    while (linhaDaTorre < 0 || linhaDaTorre > 5) {
+                                        System.out.println("Linha inválida. Tente novamente: ");
+                                        linhaDaTorre = scanner.nextInt() - 1;
+                                    }
+                                    System.out.println("Coluna: ");
+                                    int colunaDaTorre = scanner.nextInt() - 1;
+                                    while (colunaDaTorre < 1 || colunaDaTorre > 3) {
+                                        System.out.println("Coluna inválida. Tente novamente: ");
+                                        colunaDaTorre = scanner.nextInt() - 1;
+                                    }
+                                    torres[contTorres] = new TorreTipo3(linhaDaTorre, colunaDaTorre);
+                                    contTorres++;
+                                } catch (RuntimeException e) {
+                                    System.out.println(e.getMessage());
                                 }
-                                System.out.println("Coluna: ");
-                                int colunaDaTorre = scanner.nextInt() - 1;
-                                while (colunaDaTorre < 0 || colunaDaTorre > 2) {
-                                    System.out.println("Coluna inválida. Tente novamente: ");
-                                    colunaDaTorre = scanner.nextInt() - 1;
-                                }
-                                torres[contTorres] = new TorreTipo2(linhaDaTorre, colunaDaTorre);
-                                contTorres++;
-                            } catch (RuntimeException e){
-                                System.out.println(e.getMessage());
-                            }
-                            break;
-                        case 3:
-                            try{
-                                moeda.comprar(Constantes.CUSTO_TORRE_3);
-                                System.out.println("Linha: ");
-                                int linhaDaTorre = scanner.nextInt() - 1;
-                                while (linhaDaTorre < 0|| linhaDaTorre > 5) {
-                                    System.out.println("Linha inválida. Tente novamente: ");
-                                    linhaDaTorre = scanner.nextInt() - 1;
-                                }
-                                System.out.println("Coluna: ");
-                                int colunaDaTorre = scanner.nextInt() - 1;
-                                while (colunaDaTorre < 0 || colunaDaTorre > 2) {
-                                    System.out.println("Coluna inválida. Tente novamente: ");
-                                    colunaDaTorre = scanner.nextInt() - 1;
-                                }
-                                torres[contTorres] = new TorreTipo3(linhaDaTorre, colunaDaTorre);
-                                contTorres++;
-                            }
-                            catch (RuntimeException e){
-                                System.out.println(e.getMessage());
-                            }
-                            break;
-                        default:
-                            System.out.println("Tipo inválido ou indisponível.");
+                                break;
+                            default:
+                                System.out.println("Tipo inválido ou indisponível.");
+                        }
+
+                        System.out.println("Moedas: " + moeda.getMoeda());
                     }
-                    System.out.println("Moedas: " + moeda.getMoeda());
-                    System.out.println("Digite '0' para comprar mais torres: ");
-                    comprar = scanner.nextInt();
-                }
 
-                if(contWaves >= 2){
+
+
+                if (contWaves >= 2) {
 
                     System.out.println("======================");
                     System.out.print("Digite '0' para fazer upgrade nas suas torres");
                     int upgrade = scanner.nextInt();
                     System.out.println("======================");
 
-                    while(upgrade == 0){
+                    while (upgrade == 0) {
 
                         System.out.println("Moedas: " + moeda.getMoeda());
                         System.out.println("Linha da torre desejada: ");
@@ -135,22 +155,23 @@ public class Main {
                         int colunaDaTorre = scanner.nextInt() - 1;
                         boolean encontrada = false;
 
-                        for(int i = 0; i < 200; i++){
-                            if(torres[i] != null) {
+                        for (int i = 0; i < 200; i++) {
+                            if (torres[i] != null) {
                                 if (torres[i].linha == linhaDaTorre && torres[i].coluna == colunaDaTorre) {
                                     encontrada = true;
                                     try {
                                         torres[i].validarUpgradePossivel();
                                         moeda.comprar(Constantes.CUSTO_UPGRADE);
+                                        frameBase.setQuantidadeMoedas(moeda.quantidade);
                                         torres[i].upgrade();
                                         System.out.println("UPGRADE REALIZADO");
-                                    }catch (RuntimeException e){
+                                    } catch (RuntimeException e) {
                                         System.out.println(e.getMessage());
                                     }
                                 }
                             }
                         }
-                        if(!encontrada){
+                        if (!encontrada) {
                             System.out.println("Torre não encontrada.");
                         }
 
@@ -167,7 +188,7 @@ public class Main {
 
                 while (base.vida > 0 && rodando) {
                     rodando = false;
-                    tick ++;
+                    tick++;
                     for (int i = 0; i < 100; i++) {
                         if (gerenciador.monstros[i] != null) {
                             rodando = true;
@@ -175,7 +196,7 @@ public class Main {
 
                             if (gerenciador.monstros[i].temVida) {
 
-                                if ((gerenciador.monstros[i].queimado) && (!gerenciador.monstros[i].resistente)){
+                                if ((gerenciador.monstros[i].queimado) && (!gerenciador.monstros[i].resistente)) {
                                     gerenciador.monstros[i].receberDano(1);
                                     System.out.println("inimigo recebeu dano do fogo!");
                                 }
@@ -193,6 +214,7 @@ public class Main {
                                     if (gerenciador.monstros[i].getPosicao() == base.getPosicao()) {
 
                                         base.receberDano(gerenciador.monstros[i].dano);
+                                        frameBase.setVidaDaBase(base.vida);
                                         //anda = false;
                                     }
 
@@ -209,7 +231,7 @@ public class Main {
                                                 if (disparo[c] != null && disparo[c].emTransito) {
                                                     disparo[c].andar();
 
-                                                    if (disparo[c].getColuna()>= 14){
+                                                    if (disparo[c].getColuna() >= 14) {
                                                         disparo[c] = null;
                                                     }
 
@@ -218,8 +240,8 @@ public class Main {
                                                         gerenciador.monstros[i].morrer();
                                                         System.out.println("Vida do inimigo: " + gerenciador.monstros[i].getVida());
 
-                                                        if ((disparo[c].burn) && (!gerenciador.monstros[i].queimado)){
-                                                            gerenciador.monstros[i].queimado=true;
+                                                        if ((disparo[c].burn) && (!gerenciador.monstros[i].queimado)) {
+                                                            gerenciador.monstros[i].queimado = true;
                                                             System.out.println("O inimigo foi queimado");
                                                         }
                                                     }
@@ -242,12 +264,13 @@ public class Main {
                                         }
                                     }
                                 }
-                                if (anda==true) {
-                                   gerenciador.monstros[i].caminharDoElemento();
-                            }
+                                if (anda == true) {
+                                    gerenciador.monstros[i].caminharDoElemento();
+                                }
 
                             } else {
                                 moeda.ganhar(gerenciador.monstros[i].getValor());
+                                frameBase.setQuantidadeMoedas(moeda.quantidade);
                                 gerenciador.monstros[i] = null;
                             }
                         }
@@ -264,14 +287,14 @@ public class Main {
                                 }
                             }
                             Enemy m = gerenciador.monstros[j];
-                            if ((m != null && m.linha == i) && (j<=100)) {
+                            if ((m != null && m.linha == i) && (j <= 100)) {
 
                                 if (m.temVida) {
                                     caminhos[i].colocarInimigo(m.getPosicao());
                                 }
                             }
                             Torre r = torres[j];
-                            if ((r != null && r.linha == i) && (j<=100)) {
+                            if ((r != null && r.linha == i) && (j <= 100)) {
                                 if (r.temVida) {
                                     caminhos[i].colocarTorre(r.getColuna());
                                 }
@@ -292,16 +315,15 @@ public class Main {
                 contWaves++;
 
             }
-            if (contWaves <10){
+            if (contWaves < 10) {
                 System.out.println("você perdeu!!");
-            }
-            else{
+            } else {
                 System.out.print("Você ganhou!");
             }
 
         }
     }
-}
+
 
 
 
